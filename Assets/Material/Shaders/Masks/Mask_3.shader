@@ -6,7 +6,7 @@
 		_Metallic("Metallic", Range(0,1)) = 0.0
 	}
 	SubShader {
-		Tags { "RenderType"="Opaque" "Queue"="Geometry-100" }
+		Tags { "RenderType"="Transparent" "Queue"="Geometry-100" }
 		LOD 200
 		ColorMask 0
 		ZWrite Off
@@ -19,7 +19,7 @@
 		
 		CGPROGRAM
 		// Physically based Standard lighting model, and enable shadows on all light types
-		#pragma surface surf Standard fullforwardshadows
+		#pragma surface surf Standard fullforwardshadows alpha:fade
 
 		// Use shader model 3.0 target, to get nicer looking lighting
 		#pragma target 3.0

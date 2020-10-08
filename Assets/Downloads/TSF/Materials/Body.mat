@@ -29,13 +29,13 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _Asym: 0
-    - _Brightness: 1
+    - _Brightness: 1.14
     - _Cull: 2
     - _Cutoff: 0.5
     - _DS: 0
     - _DetailTex: 0
     - _Outl: 1
-    - _Outline: 1
+    - _Outline: 0
     - _TintColor: 1
     - _TrOp: 0
     - _Trans: 0

@@ -19,25 +19,11 @@ Shader "TSF/BaseOutline1"
  
     SubShader
     {
-        Tags { "RenderType"="Opaque" "IgnoreProjector" = "True"}
+        Tags { "RenderType"="Opaque" }
 		LOD 250 
-
-
-        Stencil {
-            Ref 3
-            Comp Equal
-            Pass Keep
-            Fail Keep
-        }
-
-
         Lighting Off
         Fog { Mode Off }
-
-
-
         
-            
         UsePass "TSF/Base1/BASE"
         	
         Pass
