@@ -26,9 +26,6 @@ public class stageManager : MonoBehaviour
 
     public Material buildingMat;
 
-    private bool toggleStage;
-
-
     //public Animation doorAnim;
     [SerializeField]
     public GameObject[] Stages;
@@ -39,17 +36,7 @@ public class stageManager : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
-
-
-        if (Input.GetKeyDown("space"))
-        {
-            toggleStage ^= true;
-            Mask4_Event.transform.DOScale(new Vector3(0.36f, 0, 0.1971832f),2);
-            Mask2_Interactive.transform.DOScale(new Vector3(0, 0, 0), 1);
-        }
-
-
+    {   
         if (Input.GetMouseButtonDown(0))
         {
             
@@ -87,8 +74,8 @@ public class stageManager : MonoBehaviour
                         if(hitName == "InteractiveNatural")
                         {
 
-                            Invoke("activateNatural",1.4f);
-                            Mask3_XR.transform.DOScale(new Vector3(0, 0, 0), 3);
+                            Invoke("activateNatural",1.45f);
+
 
                         }
                     }
@@ -134,8 +121,7 @@ public class stageManager : MonoBehaviour
     public void activateXR()
     {
 
-        //CameraMask3.transform.DOScale(new Vector3(0.303488f, 0.7190667f, 0.5058357f), 2);
-        // CameraMask1.transform.DOScale(new Vector3(0, 0, 0), 2);
+ 
     }
 
 
@@ -148,13 +134,13 @@ public class stageManager : MonoBehaviour
     public void activateInteractiveBlue()
     {
 
-
     }
 
     public  void activateNatural()
     {
 
         CameraMask2.SetActive(true);
+        Mask5_WhiteBlue.transform.DOScale(new Vector3(0.1316716f, 0, 0.2105989f), 1);
 
 
     }
