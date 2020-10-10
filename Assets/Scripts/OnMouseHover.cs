@@ -20,12 +20,16 @@ public class OnMouseHover : MonoBehaviour
         if (!hoveingEnter)
         {
 
-            Debug.Log("Mouse is over GameObject.");
-            uiObject.GetComponent<Image>().DOFade(0.6f, 1);
+            Debug.Log("Mouse is over " + gameObject.name);
+            /*uiObject.GetComponent<Image>().DOFade(0.6f, 1);
             uiText = uiObject.GetComponentsInChildren<TextMeshProUGUI>();
             foreach (TextMeshProUGUI t in uiText)
-                t.DOFade(1, 1);
+            t.DOFade(1, 1);
+            */
             hoveingEnter = true;
+           
+
+            GetComponentInChildren<TextMeshPro>().DOFade(1, 1);
         }
             
         }
@@ -33,11 +37,14 @@ public class OnMouseHover : MonoBehaviour
         void OnMouseExit()
         {
         hoveingEnter = false;
-            //The mouse is no longer hovering over the GameObject so output this message each frame
-            Debug.Log("Mouse is no longer on GameObject.");
-        uiObject.GetComponent<Image>().DOFade(0, 1);
-        foreach (TextMeshProUGUI t in uiText)
-            t.DOFade(0, 1);
+
+        GetComponentInChildren<TextMeshPro>().DOFade(0, 1);
+
+        //The mouse is no longer hovering over the GameObject so output this message each frame
+        Debug.Log("Mouse is no longer on GameObject.");
+       // uiObject.GetComponent<Image>().DOFade(0, 1);
+       // foreach (TextMeshProUGUI t in uiText)
+          //  t.DOFade(0, 1);
     }
     
 }
