@@ -17,6 +17,8 @@ public class stageManager : MonoBehaviour
     public GameObject CameraMask1;
     public GameObject CameraMask2;
     public GameObject CameraMask3;
+    public GameObject CameraMask4;
+    public GameObject CameraMask5;
 
     public GameObject Mask1_OutDoors;
     public GameObject Mask2_Interactive;
@@ -31,6 +33,8 @@ public class stageManager : MonoBehaviour
     private bool XR_active;
     private bool natural_active;
     private bool whiteBlue_active;
+    private bool Clothes_active;
+
     private bool event_active;
 
 
@@ -99,7 +103,18 @@ public class stageManager : MonoBehaviour
                             Mask5_WhiteBlue.transform.DOScale(new Vector3(0.7875425f, 0, 0.428295f), 2);
                             natural_active = false;
                             whiteBlue_active = true;
+
                             Invoke("activateInteractiveBlue",2);
+
+                        }
+
+                        if(hitName == "InteractiveClothes")
+                        {
+                            CameraMask1.transform.localScale = new Vector3(0, 0, 0);
+                            CameraMask2.transform.localScale = new Vector3(0, 0, 0);
+                            CameraMask5.transform.localScale = new Vector3(1, 1, 1);
+
+                            Clothes_active = true;
 
                         }
 
@@ -132,7 +147,7 @@ public class stageManager : MonoBehaviour
 
         if (XR_active)
         {
-            anim.SetTrigger("Back");
+            anim.SetTrigger("Back");        
             inStore_active = true;
             natural_active = false;
             XR_active = false;
@@ -153,14 +168,27 @@ public class stageManager : MonoBehaviour
             Debug.Log("NATURAL_EXIT");
         }
 
-        if (whiteBlue_active)
+        if (whiteBlue_active && !Clothes_active)
         {
 
             HoverObjects.GetComponentInChildren<Collider>().enabled = false;
             Mask5_WhiteBlue.transform.DOScale(new Vector3(0.1316716f, 0, 0.21f), 2);
+            CameraMask5.transform.localScale = new Vector3(0, 0, 0);
+
             natural_active = true;
             whiteBlue_active = false;
             Debug.Log("WHITE/BLUE EXIT");
+
+        }
+
+        if (Clothes_active)
+        {
+            anim.SetTrigger("Back");
+
+
+            Invoke("activateCameraMasks", 2);
+            Debug.Log("hej, not now..");
+            Clothes_active = false;
 
         }
 
@@ -180,6 +208,8 @@ public class stageManager : MonoBehaviour
             event_active = false;
             Debug.Log("Event");
         }
+
+        
 
 
         oldHitName = null;
@@ -239,6 +269,16 @@ public class stageManager : MonoBehaviour
     {
         Mask5_WhiteBlue.SetActive(true);
         HoverObjects.GetComponentInChildren<Collider>().enabled = true;
+
+
+    }
+
+    public void activateCameraMasks()
+    {
+
+        CameraMask1.transform.localScale = new Vector3(1, 1, 1);
+        CameraMask2.transform.localScale = new Vector3(1, 1, 1);
+
     }
 
     public  void activateNatural()

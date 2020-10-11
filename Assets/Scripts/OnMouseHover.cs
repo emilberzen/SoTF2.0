@@ -10,8 +10,7 @@ public class OnMouseHover : MonoBehaviour
 {
 
     private bool hoveingEnter;
-    public GameObject uiObject;
-    public Component[] uiText;
+
 
     void OnMouseOver()
         {
