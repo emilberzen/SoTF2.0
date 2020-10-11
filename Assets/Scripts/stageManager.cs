@@ -26,14 +26,7 @@ public class stageManager : MonoBehaviour
 
 
     public GameObject HoverObjects;
-
-    public GameObject inStoreButton;
-    public GameObject xrButton;
-    public GameObject NaturalButton;
-    public GameObject EventButton;
-    public GameObject WhiteBlueButton;
-    public GameObject WhiteBlueClothesButton;
-
+        
     private bool inStore_active;
     private bool XR_active;
     private bool natural_active;
@@ -121,8 +114,10 @@ public class stageManager : MonoBehaviour
         }
     }
 
-    public void BackToStart()
+    public void goBack()
     {
+
+        Debug.Log("HELLO");
 
         if (inStore_active)
         {
@@ -187,12 +182,11 @@ public class stageManager : MonoBehaviour
         }
 
 
-
-
-
-
         oldHitName = null;
     }
+
+
+
 
     public void WhiteStore()
     {
