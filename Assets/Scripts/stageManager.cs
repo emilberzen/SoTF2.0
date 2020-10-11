@@ -5,6 +5,7 @@ using DG.Tweening;
 using UnityEngine.Experimental.GlobalIllumination;
 using UnityEngine.UI;
 using UnityEngine.Assertions.Must;
+using TMPro;
 
 public class stageManager : MonoBehaviour
 {
@@ -13,6 +14,8 @@ public class stageManager : MonoBehaviour
     private Animator anim;
     private string hitName;
     private string oldHitName;
+
+    public TextMeshProUGUI backButton;
 
     public GameObject CameraMask1;
     public GameObject CameraMask2;
@@ -78,7 +81,8 @@ public class stageManager : MonoBehaviour
 
                         if (hitName == "Outdoor")
                         {
-                            inStore_active = true; 
+                            inStore_active = true;
+                            backButton.DOFade(1, 2);
                             Invoke("actvateStore", 2f);
                         }
 
@@ -102,7 +106,7 @@ public class stageManager : MonoBehaviour
 
                         if (hitName == "InteractiveBlue/White")
                         {
-                            Mask5_WhiteBlue.transform.DOScale(new Vector3(0.7875425f, 0, 0.428295f), 2);
+                            Mask5_WhiteBlue.transform.DOScale(new Vector3(1f, 0, 0.428295f), 2);
                             natural_active = false;
                             whiteBlue_active = true;
 
@@ -151,6 +155,7 @@ public class stageManager : MonoBehaviour
             Mask2_Interactive.transform.DOScale(new Vector3(0, 0, 0), 2);
             Mask3_XR.transform.DOScale(new Vector3(0, 0, 0), 2);
             CameraMask1.transform.DOScale(new Vector3(0, 0, 0), 1.5f);
+            backButton.DOFade(0, 1);
             inStore_active = false;
             Debug.Log("Instore");
         }
@@ -285,7 +290,7 @@ public class stageManager : MonoBehaviour
         natural_active = false;
         event_active = true;
         Mask5_WhiteBlue.transform.DOScale(new Vector3(0, 0, 0), 0.2f);
-        Mask4_Event.transform.DOScale(new Vector3(0.8196557f, 0, 0.372834f), 2);
+        Mask4_Event.transform.DOScale(new Vector3(1f, 0, 0.372834f), 2);
 
 
     }
