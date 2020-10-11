@@ -27,7 +27,9 @@ public class stageManager : MonoBehaviour
     public GameObject Mask5_WhiteBlue;
 
 
-    public GameObject HoverObjects;
+    public GameObject[] HoverObjects_Blue;
+
+    public GameObject[] HoverObjects_natural;
         
     private bool inStore_active;
     private bool XR_active;
@@ -104,6 +106,11 @@ public class stageManager : MonoBehaviour
                             natural_active = false;
                             whiteBlue_active = true;
 
+                            for (int j = 0; j < HoverObjects_natural.Length; j++)
+                            {
+                                HoverObjects_natural[j].GetComponent<Collider>().enabled = false;
+                            }
+
                             Invoke("activateInteractiveBlue",2);
 
                         }
@@ -121,6 +128,10 @@ public class stageManager : MonoBehaviour
                         if(hitName == "Event")
                         {
 
+                            for (int j = 0; j < HoverObjects_natural.Length; j++)
+                            {
+                                HoverObjects_natural[j].GetComponent<Collider>().enabled = false;
+                            }
                             activateEvent();
                         }
                     }
@@ -171,9 +182,19 @@ public class stageManager : MonoBehaviour
         if (whiteBlue_active && !Clothes_active)
         {
 
-            HoverObjects.GetComponentInChildren<Collider>().enabled = false;
+            for (int i = 0; i < HoverObjects_Blue.Length; i++)
+            {
+                HoverObjects_Blue[i].GetComponent<Collider>().enabled = false;
+            }
+            
             Mask5_WhiteBlue.transform.DOScale(new Vector3(0.1316716f, 0, 0.21f), 2);
             CameraMask5.transform.localScale = new Vector3(0, 0, 0);
+
+
+            for (int j = 0; j < HoverObjects_natural.Length; j++)
+            {
+                HoverObjects_natural[j].GetComponent<Collider>().enabled = true;
+            }
 
             natural_active = true;
             whiteBlue_active = false;
@@ -184,8 +205,6 @@ public class stageManager : MonoBehaviour
         if (Clothes_active)
         {
             anim.SetTrigger("Back");
-
-
             Invoke("activateCameraMasks", 2);
             Debug.Log("hej, not now..");
             Clothes_active = false;
@@ -204,6 +223,12 @@ public class stageManager : MonoBehaviour
                 lights[i].DOColor(Color.white, 2);
             }
 
+
+
+            for (int j = 0; j < HoverObjects_natural.Length; j++)
+            {
+                HoverObjects_natural[j].GetComponent<Collider>().enabled = true;
+            }
             natural_active = true;
             event_active = false;
             Debug.Log("Event");
@@ -268,8 +293,13 @@ public class stageManager : MonoBehaviour
     public void activateInteractiveBlue()
     {
         Mask5_WhiteBlue.SetActive(true);
-        HoverObjects.GetComponentInChildren<Collider>().enabled = true;
 
+
+
+        for (int i = 0; i < HoverObjects_Blue.Length; i++)
+        {
+            HoverObjects_Blue[i].GetComponent<Collider>().enabled = true;
+        }
 
     }
 
