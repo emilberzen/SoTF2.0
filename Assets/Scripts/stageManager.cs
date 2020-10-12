@@ -33,7 +33,9 @@ public class stageManager : MonoBehaviour
     public GameObject[] HoverObjects_Blue;
 
     public GameObject[] HoverObjects_natural;
-        
+
+    public GameObject hoverClothes;
+
     private bool inStore_active;
     private bool XR_active;
     private bool natural_active;
@@ -52,7 +54,8 @@ public class stageManager : MonoBehaviour
     public GameObject[] Stages;
     void Start()
     {
-        anim = GetComponent<Animator>();
+        anim = Camera.main.GetComponent<Animator>();
+       
     }
 
     // Update is called once per frame
@@ -60,7 +63,7 @@ public class stageManager : MonoBehaviour
     {   
         if (Input.GetMouseButtonDown(0))
         {
-            
+            Debug.Log("TESTING THISS!!");
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
 
@@ -124,7 +127,11 @@ public class stageManager : MonoBehaviour
                             CameraMask1.transform.localScale = new Vector3(0, 0, 0);
                             CameraMask2.transform.localScale = new Vector3(0, 0, 0);
                             CameraMask5.transform.localScale = new Vector3(1, 1, 1);
-
+                            hoverClothes.SetActive(true);
+                            for (int j = 0; j < HoverObjects_Blue.Length; j++)
+                            {
+                                HoverObjects_Blue[2].SetActive(false);
+                            }
                             Clothes_active = true;
 
                         }
@@ -211,7 +218,12 @@ public class stageManager : MonoBehaviour
         {
             anim.SetTrigger("Back");
             Invoke("activateCameraMasks", 2);
-            Debug.Log("hej, not now..");
+            hoverClothes.SetActive(false);
+            for (int j = 0; j < HoverObjects_Blue.Length; j++)
+            {
+                HoverObjects_Blue[2].SetActive(true);
+            }
+            
             Clothes_active = false;
 
         }
