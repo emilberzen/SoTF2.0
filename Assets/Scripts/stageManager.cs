@@ -12,10 +12,12 @@ public class stageManager : MonoBehaviour
     // Start is called before the first frame update
 
     private Animator anim;
+    public Animation frontDoor;
     private string hitName;
     private string oldHitName;
 
     public TextMeshProUGUI backButton;
+    public TextMeshProUGUI RandomStudio;
 
     public GameObject CameraMask1;
     public GameObject CameraMask2;
@@ -84,8 +86,11 @@ public class stageManager : MonoBehaviour
 
                         if (hitName == "Outdoor")
                         {
+                            frontDoor.Play("FrontWindowAnim");
                             inStore_active = true;
                             backButton.DOFade(1, 2);
+                            RandomStudio.DOFade(0, 1);
+                            Debug.Log("hellp");
                             Invoke("actvateStore", 2f);
                         }
 
@@ -127,13 +132,8 @@ public class stageManager : MonoBehaviour
                             CameraMask1.transform.localScale = new Vector3(0, 0, 0);
                             CameraMask2.transform.localScale = new Vector3(0, 0, 0);
                             CameraMask5.transform.localScale = new Vector3(1, 1, 1);
-                            hoverClothes.SetActive(true);
-                            for (int j = 0; j < HoverObjects_Blue.Length; j++)
-                            {
-                                HoverObjects_Blue[2].SetActive(false);
-                            }
-                            Clothes_active = true;
 
+                            Invoke("activateClothes", 2);
                         }
 
                         if(hitName == "Event")
@@ -151,19 +151,31 @@ public class stageManager : MonoBehaviour
         }
     }
 
+    public void activateClothes()
+    {
+        hoverClothes.SetActive(true);
+        for (int j = 0; j < HoverObjects_Blue.Length; j++)
+        {
+            HoverObjects_Blue[2].SetActive(false);
+        }
+        Clothes_active = true;
+
+    }
+   
     public void goBack()
     {
 
-        Debug.Log("HELLO");
 
         if (inStore_active)
         {
             anim.SetTrigger("Back");
+            inStore_active = false;
+            frontDoor.Play("FrontWindowAnimExit");
             Mask2_Interactive.transform.DOScale(new Vector3(0, 0, 0), 2);
             Mask3_XR.transform.DOScale(new Vector3(0, 0, 0), 2);
             CameraMask1.transform.DOScale(new Vector3(0, 0, 0), 1.5f);
             backButton.DOFade(0, 1);
-            inStore_active = false;
+            RandomStudio.DOFade(1, 2);
             Debug.Log("Instore");
         }
 
