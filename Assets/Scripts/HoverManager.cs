@@ -10,10 +10,7 @@ public class HoverManager : MonoBehaviour
 
     private string hitName;
     private string oldHitName;
-    private TextMeshPro uiText;
     private bool isHovering;
-    private GameObject ActiveSprite;
-
     private int currentImage;
 
     [SerializeField]
@@ -48,10 +45,16 @@ public class HoverManager : MonoBehaviour
                     //ActiveSprite = hit.transform.gameObject;
                    // ActiveSprite.GetComponentInChildren<SpriteRenderer>().DOFade(1, 1);
 
-                    uiImages[i].DOFade(1, 1);
-                    currentImage = i; 
+                    uiImages[i].DOFade(0.7f, 1);
+                    if (uiImages[i].transform.childCount > 0)
+                    {
+                        uiImages[i].GetComponentInChildren<TextMeshProUGUI>().DOFade(1, 1);
+                        // we have children!
+                    }
+
 
                     Debug.Log("FadeIn" + hitName + " " + oldHitName);
+                    currentImage = i;
 
                     isHovering = true;
 
@@ -59,7 +62,13 @@ public class HoverManager : MonoBehaviour
                 else if( oldHitName != hitName && isHovering)
                 {
                     Debug.Log("Fade out" + " // " + stages[i].name);
-                   // ActiveSprite.GetComponentInChildren<SpriteRenderer>().DOFade(0, 1);
+                    // ActiveSprite.GetComponentInChildren<SpriteRenderer>().DOFade(0, 1);
+
+                    if (uiImages[currentImage].transform.childCount > 0)
+                    {
+                        uiImages[currentImage].GetComponentInChildren<TextMeshProUGUI>().DOFade(0, 1);
+                        // we have children!
+                    }
                     uiImages[currentImage].DOFade(0, 1);
 
                     isHovering = false;
@@ -72,7 +81,6 @@ public class HoverManager : MonoBehaviour
 
         }
     }
-
     }
 
 

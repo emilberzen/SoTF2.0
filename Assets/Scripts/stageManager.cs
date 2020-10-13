@@ -37,6 +37,7 @@ public class stageManager : MonoBehaviour
     public GameObject[] HoverObjects_natural;
 
     public GameObject hoverClothes;
+    public GameObject hoverEvent;
 
     private bool inStore_active;
     private bool XR_active;
@@ -99,7 +100,7 @@ public class stageManager : MonoBehaviour
                         {
                             XR_active = true;
                             inStore_active = false;
-                            activateXR();
+                            Invoke("activateXR", 2);
                         }
 
                         
@@ -133,12 +134,12 @@ public class stageManager : MonoBehaviour
                             CameraMask2.transform.localScale = new Vector3(0, 0, 0);
                             CameraMask5.transform.localScale = new Vector3(1, 1, 1);
 
-                            Invoke("activateClothes", 2);
+                            Invoke("activateClothes", 1);
                         }
 
                         if(hitName == "Event")
                         {
-
+                            Invoke("activateEventHover",1);
                             for (int j = 0; j < HoverObjects_natural.Length; j++)
                             {
                                 HoverObjects_natural[j].GetComponent<Collider>().enabled = false;
@@ -161,6 +162,11 @@ public class stageManager : MonoBehaviour
         Clothes_active = true;
 
     }
+
+    public void activateEventHover()
+    {
+        hoverEvent.SetActive(true);
+    }
    
     public void goBack()
     {
@@ -182,7 +188,9 @@ public class stageManager : MonoBehaviour
 
         if (XR_active)
         {
-            anim.SetTrigger("Back");        
+            anim.SetTrigger("Back");
+
+            CameraMask3.transform.DOScale(new Vector3(0, 0, 0), 1);
             inStore_active = true;
             natural_active = false;
             XR_active = false;
@@ -248,7 +256,7 @@ public class stageManager : MonoBehaviour
 
             for (int i = 0; i < lights.Length; i++)
             {
-                lights[i].DOIntensity(1, 2);
+                lights[i].DOIntensity(0.1f, 1);
                 lights[i].DOColor(Color.white, 2);
             }
 
@@ -258,6 +266,8 @@ public class stageManager : MonoBehaviour
             {
                 HoverObjects_natural[j].GetComponent<Collider>().enabled = true;
             }
+
+            hoverEvent.SetActive(false);
             natural_active = true;
             event_active = false;
             Debug.Log("Event");
@@ -288,18 +298,13 @@ public class stageManager : MonoBehaviour
         Mask3_XR.transform.DOScale(new Vector3(0.303488f, 0.7190667f, 0.5058357f), 2);
     }
 
-    public void activateMask2()
-    {
 
-        Mask2_Interactive.transform.DOScale(new Vector3(0.370707f, 0.3977927f, 0.3811532f), 2);
-        Mask3_XR.transform.DOScale(new Vector3(0, 0, 0), 2);
-    }
 
 
     public void activateXR()
     {
 
- 
+        CameraMask3.transform.DOScale(new Vector3(1, 1, 1), 2);
     }
 
 
@@ -307,7 +312,7 @@ public class stageManager : MonoBehaviour
     {
         for (int i = 0; i < lights.Length; i++)
         {
-            lights[i].DOIntensity(20, 2);
+            lights[i].DOIntensity(1, 2);
             lights[i].DOColor(Color.red, 2);
         }
 
