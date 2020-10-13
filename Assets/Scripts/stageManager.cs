@@ -52,7 +52,6 @@ public class stageManager : MonoBehaviour
     [SerializeField]
     public Light[] lights;
 
-    public Light xrLight;
 
     //public Animation doorAnim;
     [SerializeField]
