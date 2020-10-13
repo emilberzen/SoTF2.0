@@ -52,6 +52,8 @@ public class stageManager : MonoBehaviour
     [SerializeField]
     public Light[] lights;
 
+    public Light xrLight;
+
     //public Animation doorAnim;
     [SerializeField]
     public GameObject[] Stages;
@@ -312,7 +314,7 @@ public class stageManager : MonoBehaviour
     {
         for (int i = 0; i < lights.Length; i++)
         {
-            lights[i].DOIntensity(1, 2);
+            lights[i].DOIntensity(2, 2);
             lights[i].DOColor(Color.red, 2);
         }
 

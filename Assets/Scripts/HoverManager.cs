@@ -45,7 +45,7 @@ public class HoverManager : MonoBehaviour
                     //ActiveSprite = hit.transform.gameObject;
                    // ActiveSprite.GetComponentInChildren<SpriteRenderer>().DOFade(1, 1);
 
-                    uiImages[i].DOFade(0.7f, 1);
+                    uiImages[i].DOFade(0.8f, 1);
                     if (uiImages[i].transform.childCount > 0)
                     {
                         uiImages[i].GetComponentInChildren<TextMeshProUGUI>().DOFade(1, 1);
